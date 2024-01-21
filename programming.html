@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Learning for Older Adults</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #87CEEB, #87CEEB, #87CEEB);
+      position: relative;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      max-height: 400px;
+      height: 90vh;
+    }
+    body.dark-mode {
+    background: #333; 
+    color: #fff; 
+  }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+    }
+    h1,
+    h2,
+    h3 {
+      color: #fff;
+    }
+
+    header {
+      background-color: #3498db;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-top: 50px;
+      padding: 10px;
+      background: #3498db;
+      color: #fff;
+      border-radius: 10px;
+      position: relative;
+      animation: titleAnimation 2s ease-in-out infinite;
+    }
+
+    @keyframes titleAnimation {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1);
+      }
+    }
+
+    nav {
+      background: #333;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #27ae60;
+    }
+
+    button {
+      margin: 10px;
+      padding: 15px 30px;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background: #27ae60;
+      transform: scale(1.05);
+    }
+
+    #startButton, #instructionButtons, .instructions, #slideshow, #feedbackForm, #additionalContent, #quiz, #resources {
+      opacity: 0;
+      margin-top: 10px;
+      transition: opacity 0.5s;
+    }
+
+    #startButton {
+      background: #27ae60;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #fontSelectorSection {
+      background: #3498db;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .instructions {
+        text-align: left;
+        position: relative;
+    }
+
+
+    #homeButton, #backButton {
+      margin-top: 10px;
+      background: #3498db;
+    }
+    
+
+    #backButton {
+      display: none;
+    }
+
+    #slideshow {
+      max-width: 800px;
+      margin: 10px auto;
+      overflow: hidden;
+    }
+
+    #slideshow img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #feedbackForm {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #feedbackForm input, #feedbackForm textarea, #feedbackForm button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #feedbackForm button {
+      background: #27ae60;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    #feedbackForm button:hover {
+      background: #218c56;
+      transform: scale(1.05);
+    }
+
+    #quiz, #resources {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    #quiz h2, #resources h2 {
+      color: #27ae60;
+    }
+
+    #quiz form, #resources ul {
+      margin-top: 10px;
+    }
+
+    #quiz input, #quiz button, #resources li {
+      margin-top: 5px;
+    }
+
+    #quiz button, #resources button {
+      background: #27ae60;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    #quiz button:hover, #resources button:hover {
+      background: #218c56;
+      transform: scale(1.05);
+    }
+    #creditCardInstructions {
+      background: #250;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px;
+      color: #fff;
+      text-align: left;
+    }
+    #internetInstructions {
+        background: #333;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px;
+        color: #fff;
+        text-align: left;
+    }
+
+    #bankingInstructions {
+        background: #203;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px;
+        color: #fff;
+        text-align: left;
+    }
+
+    #phoneInstructions {
+        background: #036;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px;
+        color: #fff;
+        text-align: left; 
+    }
+
+    #google_translate_element {
+        margin-top: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>TechEase: Empowering Seniors Through Interactive Learning</h1>
+  <form>
+    <h2>User Registration</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <nav>
+    <a href="#" onclick="showHome()">Home</a>
+    <a href="#" onclick="showAbout()">About</a>
+    <a href="#" onclick="showContact()">Contact</a>
+    <a href="#" onclick="showGallery()">Gallery</a>
+    <a href="#" onclick="showFeedbackForm()">Feedback</a>
+    <a href="#" onclick="showQuiz()">Quiz</a>
+    <a href="#" onclick="showResources()">Resources</a>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  </nav>
+
+
+  <h1>Choose your language:</h1>
+  <button onclick="showStartButton()">English</button>
+  <div id="google_translate_element"></div>
+
+  <div id="fontSelectorSection">
+    <label for="fontSelector">Select Font:</label>
+    <select id="fontSelector" onchange="changeFont()">
+      <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Default Font</option>
+      <option value="Arial, sans-serif">Arial</option>
+      <option value="Georgia, serif">Georgia</option>
+      <option value="'Courier New', Courier, monospace">Courier New</option>
+    </select>
+  </div>
+
+  <div id="startButton">
+    <h2>Press the button to get started!</h2>
+    <button onclick="showInstructionButtons()">Get Started</button>
+  </div>
+
+  <div id="instructionButtons">
+    <button onclick="showInstructions('How to use credit card')">Learn Credit Cards</button>
+    <button onclick="showInstructions('Learn how to use internet')">Learn Internet Usage</button>
+    <button onclick="showInstructions('Learn how to use banking')">Learn Banking</button>
+    <button onclick="showInstructions('Learn how to use a basic phone and where to buy')">Learn Basic Phone Usage</button>
+  </div>
+
+  <div class="instructions" id="creditCardInstructions">
+    <h3>How to use credit card:</h3>
+    <p>Placeholder text for credit card instructions...</p>
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 1">
+    <button onclick="showHome()">Back to Home</button>
+    <p>More information about using a credit card can be found here...</p>
+  </div>
+
+  <div class="instructions" id="internetInstructions">
+    <h3>Learn how to use internet:</h3>
+    <p>Placeholder text for internet instructions...</p>
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 1">
+    <button onclick="showHome()">Back to Home</button>
+    <p>Explore the wonders of the internet with our comprehensive guide...</p>
+  </div>
+  
+  <div class="instructions" id="bankingInstructions">
+    <h3>Learn how to use banking:</h3>
+    <p>Placeholder text for banking instructions...</p>
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 1">
+    <button onclick="showHome()">Back to Home</button>
+    <p>Manage your finances with ease through our banking tutorial...</p>
+  </div>
+  
+  <div class="instructions" id="phoneInstructions">
+    <h3>Learn how to use a basic phone and where to buy:</h3>
+    <p>Placeholder text for phone instructions...</p>
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 1">
+    <button onclick="showHome()">Back to Home</button>
+    <p>Discover the essentials of using a basic phone and where to purchase one...</p>
+  </div>
+
+  <div id="slideshow">
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 1">
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 2">
+    <img src="https://via.placeholder.com/800x400.png" alt="Slideshow Image 3">
+  </div>
+
+
+  <div id="feedbackForm">
+    <h2>Provide Feedback</h2>
+    <form>
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea placeholder="Your Feedback"></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </div>
+
+  <div id="quiz">
+    <h2>Quiz</h2>
+    <form>
+      <label for="quizQuestion">This is the first question of the quiz! What is .....?</label>
+      <input type="text" id="quizQuestion" name="quizQuestion">
+      <button type="button" onclick="checkQuizAnswer()">Submit Answer</button>
+    </form>
+  </div>
+
+  <div id="resources">
+    <h2>Resources</h2>
+    <ul>
+      <li>#Resource 1</li>
+      <li>#Resource 2</li>
+      <li>#Resource 3</li>
+      <li>#Resource 4</li>
+    </ul>
+    <button onclick="showHome()">Back to Home</button>
+  </div>
+
+  <div id="additionalContent">
+    <h2>Additional Content</h2>
+    <p>This section contains additional information and resources for interactive learning.</p>
+  </div>
+
+  <button id="homeButton" onclick="showHome()">Home</button>
+  <button id="backButton" onclick="goBack()">Back</button>
+
+  <script>
+    function toggleDarkMode() {
+      const body = document.body;
+      const currentMode = localStorage.getItem('darkMode') === 'true';
+      body.classList.toggle('dark-mode', !currentMode);
+    
+    
+      localStorage.setItem('darkMode', !currentMode);
+  }
+    function showStartButton() {
+      hideAll();
+      document.getElementById('startButton').style.opacity = '1';
+    }
+    function changeFont() {
+      var selectedFont = document.getElementById('fontSelector').value;
+      document.body.style.fontFamily = selectedFont;
+    }
+    function showInstructionButtons() {
+      hideAll();
+      document.getElementById('instructionButtons').style.opacity = '1';
+      document.getElementById('backButton').style.display = 'none';
+      document.getElementById('homeButton').style.display = 'block';
+    }
+
+    function showInstructions(instructionText) {
+      hideAll();
+      document.getElementById('backButton').style.display = 'block';
+      document.getElementById('homeButton').style.display = 'none';
+      document.getElementById('creditCardInstructions').innerHTML = `<h3>${instructionText}</h3><p>Intro how to use credit/debit cards (click on anywhere to continue) 
+For this demonstration, we will use a TD bank debit card.This is the most important part of your credit/debit card.</p> <p>1. This is the smart chip, it is used to scan things. You must insert this chip into the scanner in order to make a transaction, in-person. 
+</p><p>2. This will tell you the card number. This is used to identify the card for transactions.</p></p>3. This section of the TD cards will explain the type of card. If it says credit, you have a credit card, and vice versa.  
+</p><p>4. This section of the card will show your name. This will show when the card expires. </p><img src="https://via.placeholder.com/400x400.png" alt="Slideshow Image 1"><p>This is the CVC, or Card Verification Code. It is also known as CVV, Card Verification Value. This is used for most online transactions, to verify that you have the card itself. 
+</p>  <img src="https://via.placeholder.com/400x400.png" alt="Slideshow Image 1"><img src="https://via.placeholder.com/400x400.png" alt="Slideshow Image 1"> <p>This the backside of a TD credit/debit card. (click on anywhere to continue) 
+</p><p></p>`;
+      document.getElementById('internetInstructions').innerHTML = `<h3>${instructionText}</h3><p>Placeholder text for internet instructions...</p>`;
+      document.getElementById('bankingInstructions').innerHTML = `<h3>${instructionText}</h3><p>Placeholder text for banking instructions...</p>`;
+      document.getElementById('phoneInstructions').innerHTML = `<h3>${instructionText}</h3><p>Placeholder text for phone instructions...</p>`;
+      document.getElementById('creditCardInstructions').style.opacity = '1';
+    }
+
+    function showHome() {
+        hideAll();
+        document.getElementById('startButton').style.opacity = '1';
+    }
+
+    function goBack() {
+        showInstructionButtons();
+    }
+
+    function showAbout() {
+        hideAll();
+        document.getElementById('additionalContent').innerHTML = `<h2>About Us</h2><p>We are dedicated to providing interactive learning for older adults. Our mission is to make learning accessible and enjoyable for everyone.</p>`;
+        document.getElementById('additionalContent').style.opacity = '1';
+    }
+
+    function showContact() {
+        hideAll();
+        document.getElementById('additionalContent').innerHTML = `<h2>Contact Us</h2><p>Feel free to contact us at <a href="mailto:info@example.com">info@gmail.com</a>.</p>`;
+        document.getElementById('additionalContent').style.opacity = '1';
+    }
+
+    function showGallery() {
+        hideAll();
+        document.getElementById('slideshow').style.opacity = '1';
+    }
+
+    function showFeedbackForm() {
+        hideAll();
+        document.getElementById('feedbackForm').style.opacity = '1';
+    }
+
+    function showQuiz() {
+        hideAll();
+        document.getElementById('quiz').style.opacity = '1';
+    }
+
+    function checkQuizAnswer() {
+        alert('Correct answer! Well done!');
+    }
+
+    function showResources() {
+        hideAll();
+        document.getElementById('resources').style.opacity = '1';
+    }
+
+    function hideAll() {
+        document.getElementById('startButton').style.opacity = '0';
+        document.getElementById('instructionButtons').style.opacity = '0';
+        document.getElementById('creditCardInstructions').style.opacity = '0';
+        document.getElementById('internetInstructions').style.opacity = '0';
+        document.getElementById('bankingInstructions').style.opacity = '0';
+        document.getElementById('phoneInstructions').style.opacity = '0';
+        document.getElementById('homeButton').style.display = 'none';
+        document.getElementById('backButton').style.display = 'none';
+        document.getElementById('slideshow').style.opacity = '0';
+        document.getElementById('feedbackForm').style.opacity = '0';
+        document.getElementById('quiz').style.opacity = '0';
+        document.getElementById('resources').style.opacity = '0';
+        document.getElementById('additionalContent').style.opacity = '0';
+    }
+
+    const initialDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (initialDarkMode) {
+        document.body.classList.add('dark-mode');
+    }
+  </script>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,ca,ceb,ny,zh-CN,co,hr,cs,da,nl,en,eo,et,tl,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,iw,hi,hmn,hu,is,ig,id,ga,it,ja,jw,kn,kk,km,ko,ku,ky,lo,la,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,my,ne,no,ps,fa,pl,pt,pa,ro,ru,sm,sr,gd,st,sn,sd,si,sk,sl,so,es,su,sw,sv,tg,ta,te,th,tr,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+</body>
+</html>
